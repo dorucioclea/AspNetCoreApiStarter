@@ -16,7 +16,7 @@ services:
     build:
       context: ./
       dockerfile: ./database/sqlserver.dockerfile
-    hostname: 'sqlserver'
+    hostname: 'docker-sqlserver'
     environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: "BigPassw0rd"
