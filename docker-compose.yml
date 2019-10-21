@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  dotnet-api:
+    container_name: dotnet-api
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    # depends_on: 
+      # - docker-sqlserver
+    command: dotnet Web.Api.dll
+    ports:
+      - 5000:5000
+  docker-sqlserver:
+    image: docker-sqlserver
+    build:
+      context: ./
+      dockerfile: ./database/sqlserver.dockerfile
+    hostname: 'sqlserver'
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: "BigPassw0rd"
+    volumes:
+      - ./data/mssql:/var/opt/mssql3
+    ports:
+      - '1433:1433'
+    expose:
+      - 1433
